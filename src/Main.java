@@ -77,6 +77,7 @@ public class Main {
                 break;
             case 5:
                 System.out.println("Exiting system...");
+                System.out.println();
                 bankingActive = false;
                 break;
             default:
