@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Main {
 
     static HashMap<String, Double> accountList = new HashMap();
+    static boolean bankingActive = true;
+
 
     public static void checkBalance(String userName) {
         if (accountList.get(userName) != null) {
@@ -73,6 +75,7 @@ public class Main {
                 break;
             case 5:
                 System.out.println("Exiting system...");
+                bankingActive = false;
                 break;
             default:
                 System.out.println("You must input a valid option!");
@@ -95,29 +98,31 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Hello and welcome to the Bank!");
-        System.out.println();
-        System.out.println("Please enter your name to begin banking.");
+        while (true) {
 
-        String userName = scanner.nextLine();
+            bankingActive = true;
+            System.out.println("Hello and welcome to the Bank!");
+            System.out.println();
+            System.out.println("Please enter your name to begin banking.");
 
-        if (accountList.containsKey(userName)) {
-            while (true) {
-                chooseOption(userName);
-            }
-        } else {
-            System.out.println("No user name found. Would you like to create an account? y/n?");
-            String createAccount = scanner.nextLine().toLowerCase();
-            if (createAccount.equals("y")) {
-                createNewAccount(userName);
-                while (true) {
+            String userName = scanner.nextLine();
+
+            if (accountList.containsKey(userName)) {
+                while (bankingActive == true) {
                     chooseOption(userName);
                 }
             } else {
-                System.out.println("You have selected to not create an account. Goodbye!");
-                System.exit(1);
+                System.out.println("No user name found. Would you like to create an account? y/n?");
+                String createAccount = scanner.nextLine().toLowerCase();
+                if (createAccount.equals("y")) {
+                    createNewAccount(userName);
+                    while (bankingActive == true) {
+                        chooseOption(userName);
+                    }
+                } else {
+                    System.out.println("You have selected to not create an account. Goodbye!");
+                }
             }
         }
-
     }
 }
