@@ -7,7 +7,7 @@ public class Main {
     static boolean bankingActive = true;
 
 
-    public static void checkBalance(String userName) {
+    private static void checkBalance(String userName) {
         if (accountList.get(userName) != null) {
             System.out.println("Your current balance is: $" + accountList.get(userName));
         } else {
@@ -15,7 +15,7 @@ public class Main {
         }
     }
 
-    public static void withdraw(String userName) {
+    private static void withdraw(String userName) {
         if (accountList.containsKey(userName)) {
             Scanner scannerDouble = new Scanner(System.in);
             System.out.println("How much would you like to withdraw?");
@@ -33,12 +33,12 @@ public class Main {
         }
     }
 
-    public static void closeAccount(String userName) {
+    private static void closeAccount(String userName) {
         accountList.remove(userName);
         System.out.println("Account removed.");
     }
 
-    public static void depositFunds(String userName) {
+    private static void depositFunds(String userName) {
         Scanner scannerDouble = new Scanner(System.in);
         System.out.println("How much would you like to deposit?");
         Double depositAmt = scannerDouble.nextDouble();
@@ -48,7 +48,7 @@ public class Main {
         System.out.println("Your new balance is: $" + accountList.get(userName));
     }
 
-    public static void chooseOption(String userName) {
+    private static void chooseOption(String userName) {
         System.out.println();
         System.out.println("Please choose an option below: ");
         System.out.println("1. Check balance");
@@ -84,7 +84,7 @@ public class Main {
 
     }
 
-    public static void createNewAccount(String userName) {
+    private static void createNewAccount(String userName) {
         Scanner scannerDouble = new Scanner(System.in);
         System.out.println("Creating new account.");
         System.out.println("How much would you like to deposit into your new account?");
@@ -108,7 +108,7 @@ public class Main {
             String userName = scanner.nextLine();
 
             if (accountList.containsKey(userName)) {
-                while (bankingActive == true) {
+                while (bankingActive) {
                     chooseOption(userName);
                 }
             } else {
@@ -116,7 +116,7 @@ public class Main {
                 String createAccount = scanner.nextLine().toLowerCase();
                 if (createAccount.equals("y")) {
                     createNewAccount(userName);
-                    while (bankingActive == true) {
+                    while (bankingActive) {
                         chooseOption(userName);
                     }
                 } else {
