@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -5,11 +6,12 @@ public class Main {
 
     static HashMap<String, Double> accountList = new HashMap();
     static boolean bankingActive = true;
+    static DecimalFormat formatting = new DecimalFormat("0.00");
 
 
     private static void checkBalance(String userName) {
         if (accountList.get(userName) != null) {
-            System.out.println("Your current balance is: $" + accountList.get(userName));
+            System.out.println("Your current balance is: $" + formatting.format(accountList.get(userName)));
         } else {
             System.out.println("You must be logged in to view a balance!");
         }
@@ -26,7 +28,7 @@ public class Main {
                 Double currentBalance = accountList.get(userName);
                 Double newBalance = currentBalance - withdrawAmt;
                 accountList.put(userName, newBalance);
-                System.out.println("Your new balance is: $" + accountList.get(userName));
+                System.out.println("Your new balance is: $" + formatting.format(accountList.get(userName)));
             }
         } else {
             System.out.println("You must be logged in to withdraw money!");
@@ -45,7 +47,7 @@ public class Main {
         Double currentBalance = accountList.get(userName);
         Double newBalance = depositAmt + currentBalance;
         accountList.put(userName, newBalance);
-        System.out.println("Your new balance is: $" + accountList.get(userName));
+        System.out.println("Your new balance is: $" + formatting.format(accountList.get(userName)));
     }
 
     private static void chooseOption(String userName) {
@@ -90,7 +92,7 @@ public class Main {
         System.out.println("How much would you like to deposit into your new account?");
         Double depositAmt = scannerDouble.nextDouble();
         accountList.put(userName, depositAmt);
-        System.out.println("Your new account balance is: $" + accountList.get(userName));
+        System.out.println("Your new account balance is: $" + formatting.format(accountList.get(userName)));
     }
 
 
